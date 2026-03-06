@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Sorpresa Gattosa! 🐱✨</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow: hidden;
+            background: #1a1a1a;
+        }
+
+        /* Overlay Iniziale */
+        #overlay-iniziale {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            cursor: pointer;
+            transition: opacity 0.5s;
+        }
+
+        #btn-start {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Video di Sfondo */
+        #video-background {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: 1;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+            opacity: 0; 
+            transition: opacity 1s ease-in;
+        }
+
+        #main-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            z-index: 10;
+        }
+
+        #ticket-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            z-index: 20;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+            border-radius: 12px;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        #immagine-biglietto {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #scratch-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 22;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .cornice-gatto {
+            position: absolute;
+            width: 110px;
+            height: auto;
+            opacity: 0;
+            z-index: 25;
+            transition: opacity 0.5s;
+        }
+
+        /* Posizionamento gatti */
+        .p1 { top: -30px; left: -10px; transform: rotate(-15deg); }
+        .p2 { top: -80px; left: 20%; transform: rotate(15deg); }
+        .p3 { top: -40px; left: 45%; transform: rotate(-5deg); }
+        .p4 { top: -50px; left: 70%; transform: rotate(15deg); }
+        .p5 { top: -35px; right: -15px; transform: rotate(-10deg); }
+        .p6 { bottom: -30px; left: -10px; transform: rotate(20deg); }
+        .p7 { bottom: -45px; left: 25%; transform: rotate(-10deg); }
+        .p8 { bottom: -40px; left: 50%; transform: rotate(5deg); }
+        .p9 { bottom: -50px; left: 75%; transform: rotate(-15deg); }
+        .p10 { bottom: -35px; right: -15px; transform: rotate(12deg); }
+        .p11 { top: 15%; left: -60px; transform: rotate(-20deg); }
+        .p12 { top: 45%; left: -70px; transform: rotate(15deg); }
+        .p13 { top: 75%; left: -60px; transform: rotate(-10deg); }
+        .p14 { top: 15%; right: -60px; transform: rotate(20deg); }
+        .p15 { top: 50%; right: -75px; transform: rotate(-15deg); }
+        .p16 { top: 80%; right: -65px; transform: rotate(10deg); }
+
+        h1 { color: white; text-shadow: 2px 2px 15px black; z-index: 30; position: relative; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div id="overlay-iniziale" onclick="iniziaTutto()">
+        <button id="btn-start">Clicca per attivare la sorpresa! 🐾🔊</button>
+    </div>
+
+    <video muted loop playsinline id="video-background">
+        <source src="aimigatito.mp4" type="video/mp4">
+    </video>
+
+    <h1>🐾 Gratta per scoprire il tuo regalo! 🐾</h1>
+
+    <div id="main-wrapper">
+        <img src="uiiai.gif" class="cornice-gatto p1">
+        <img src="gatto balla.gif" class="cornice-gatto p2">
+        <img src="gattochegira.gif" class="cornice-gatto p3">
+        <img src="gattosi mette gli occhiali.gif" class="cornice-gatto p4">
+        <img src="gattosuonatrombetta.gif" class="cornice-gatto p5">
+        <img src="gatto1.gif" class="cornice-gatto p6">
+        <img src="gatto2.gif" class="cornice-gatto p7">
+        <img src="gatto3.gif" class="cornice-gatto p8">
+        <img src="gatto5.gif" class="cornice-gatto p9">
+        <img src="gatto7.gif" class="cornice-gatto p10">
+        <img src="gatto8.gif" class="cornice-gatto p11">
+        <img src="gatto9.gif" class="cornice-gatto p12">
+        <img src="gatto10.gif" class="cornice-gatto p13">
+        <img src="gatto11.gif" class="cornice-gatto p14">
+        <img src="gatto12.gif" class="cornice-gatto p15">
+        <img src="gatto13.gif" class="cornice-gatto p16">
+
+        <div id="ticket-container">
+            <img id="immagine-biglietto" src="biglietto.png" alt="Biglietto">
+            <canvas id="scratch-canvas"></canvas>
+        </div>
+    </div>
+
+    <audio id="audioIniziale" src="rulloditamburi.mp3" loop></audio>
+    <audio id="musicaSorpresa" src="canzone.mp3" loop></audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        const canvas = document.getElementById('scratch-canvas');
+        const ctx = canvas.getContext('2d');
+        const container = document.getElementById('ticket-container');
+        const audioIniziale = document.getElementById('audioIniziale');
+        const musicaSorpresa = document.getElementById('musicaSorpresa');
+        const videoBg = document.getElementById('video-background');
+        const gatti = document.querySelectorAll('.cornice-gatto');
+        const overlay = document.getElementById('overlay-iniziale');
+        
+        let isDrawing = false;
+        let revealed = false;
+        let active = false; // Controlla se l'overlay è stato rimosso
+
+        canvas.width = container.offsetWidth;
+        canvas.height = container.offsetHeight;
+
+        // Prepariamo il grigio del gratta e vinci
+        ctx.fillStyle = '#95a5a6';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Funzione attivata dal pulsante iniziale
+        function iniziaTutto() {
+            active = true;
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 500);
+            
+            // Parte il rullo di tamburi
+            audioIniziale.play().catch(e => console.log("Errore audio iniziale"));
+        }
+
+        function scratch(e) {
+            if (!active || !isDrawing || revealed) return;
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || (e.touches ? e.touches[0].clientX : 0)) - rect.left;
+            const y = (e.clientY || (e.touches ? e.touches[0].clientY : 0)) - rect.top;
+
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.beginPath();
+            ctx.arc(x, y, 40, 0, Math.PI * 2);
+            ctx.fill();
+            checkReveal();
+        }
+
+        function checkReveal() {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let count = 0;
+            for (let i = 3; i < imageData.data.length; i += 40) {
+                if (imageData.data[i] === 0) count++;
+            }
+            if (count > (imageData.data.length / 40) * 0.45) {
+                revealed = true;
+                attivaFesta();
+            }
+        }
+
+        function attivaFesta() {
+            canvas.style.transition = 'opacity 1s';
+            canvas.style.opacity = '0';
+            
+            audioIniziale.pause();
+            videoBg.style.opacity = '1';
+            videoBg.play();
+            musicaSorpresa.play();
+
+            gatti.forEach(g => g.style.opacity = '1');
+            
+            confetti({ particleCount: 200, spread: 90, origin: { y: 0.6 } });
+            setInterval(() => {
+                confetti({
+                    particleCount: 40,
+                    angle: Math.random() * 360,
+                    spread: 55,
+                    origin: { x: Math.random(), y: Math.random() - 0.2 }
+                });
+            }, 700);
+        }
+
+        canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+        window.addEventListener('mouseup', () => isDrawing = false);
+        canvas.addEventListener('mousemove', scratch);
+        canvas.addEventListener('touchstart', (e) => { 
+            if(active) { isDrawing = true; scratch(e); e.preventDefault(); }
+        }, {passive: false});
+        canvas.addEventListener('touchend', () => isDrawing = false);
+        canvas.addEventListener('touchmove', (e) => { 
+            if(active) { scratch(e); e.preventDefault(); }
+        }, {passive: false});
+    </script>
+</body>
+</html>
